@@ -1,0 +1,93 @@
+Distributed Scheduling
+
+
+
+Java library for calculating the makespan for a set of tasks on a heterogenous distributed computing system.
+
+Written by Apurv Verma dapurv5@gmail.com December 2010*/
+
+
+
+
+All code in this library is owned by the origional author(s) and their licenses apply to that code. Any code written by me (Apurv Verma) is clearly marked and licened under the GPL as follows:
+
+/*
+ *  Copyright (C) 2010 Apurv Verma <dapurv5 at gmail.com>
+ * 
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ * 
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ * 
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+Cheers,
+
+Apurv
+dapurv5@gmail.com
+
+================================================================
+
+The project is available as a netbeans project so you can straightaway open it as a netbeans project. Adding your new heuristic to the code is easy. Just follow these steps.
+
+
+1: Go to Heuristic.java . Add your new heuristic say you call it NovelI
+
+2: Go to the class SchedulingEngine.java
+Add an else if clause as follows.
+
+      else if(h==Heuristic.NovelI)
+		schedule_NovelI(metaSet, currentTime); 
+
+
+3: Now add the schedule_NovelI() function to the same class.
+   
+private void schedule_NovelI(Vector<Task> metaSet, int currentTime){
+...PUT YOUR CODE HERE...       
+}
+
+5: Information about individual processors and tasks can be exctracted from the 'sim' object.
+
+For example sim.etc[t.tid][m] represents the expected time of completion of task 't' on the machine 'm'
+
+Similarly sim.mat[m] represents the machine availability time for machine number 'm'.
+
+
+
+4: The set of tasks is provided as a Vector. You need to iterate over this vector and for each task 't' in this vector you need to run this function.
+
+sim.mapTask(t, machine)
+
+Here 't' is the Task that has to be executed.
+And machine is the machine number of the machine that this task is being mapped to.
+
+
+6: This is all you need to do. You can tweak some parameters from the Main.java file I would recommend not to change the 'metaSetSize' by a great amount.
+
+7: The simulator takes quite some time in running. You can decrease no_of_simulations to get it work faster. The following is the list of research papers that have been consulted
+MinMean heuristic does the best among all the at present. I would be very much willing to help, if you would like to develop this library further.
+
+
+
+Research Papers.
+
+Dynamic Matching and Scheduling of a Class of Independent Tasks onto Heterogeneous Computing Systems
+Muthucumaru Maheswaran, Shoukat Ali , Howard Jay Siegel ,Debra Hensgen, and Richard F. Freund?
+
+
+A New Heuristic Approach:Min-Mean Algorithm For Scheduling Meta-Tasks On Heterogenous Computing Systems 
+Kamalam.G.K and Muralibhaskaran.V
+
+
+
+
+
+Caveats
+The simulator does not include the time consumed in the mapping the tasks to the machines in the makespan.
