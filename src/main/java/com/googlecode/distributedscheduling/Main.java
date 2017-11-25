@@ -14,7 +14,7 @@ public class Main {
          long t1=System.currentTimeMillis();
 
         /*Specify the parameters here*/
-        int NUM_MACHINES=29;
+        int NUM_MACHINES=14;
         int NUM_TASKS=500;
         double ARRIVAL_RATE=19;
         int metaSetSize=29;
